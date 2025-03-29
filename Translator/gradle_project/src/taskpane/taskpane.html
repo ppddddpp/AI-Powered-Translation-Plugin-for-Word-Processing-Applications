@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Translator</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script src="taskpane.js"></script>
+    <link rel="stylesheet" href="taskpane.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Translator</h1>
+
+        <textarea id="inputText" placeholder="Enter text here"></textarea>
+
+        <label for="targetLang">Target Language:</label>
+        <select id="targetLang">
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+            <option value="Italian">Italian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Korean">Korean</option>
+            <option value="Chinese (Simplified)">Chinese (Simplified)</option>
+            <option value="Chinese (Traditional)">Chinese (Traditional)</option>
+            <option value="Portuguese">Portuguese</option>
+            <option value="Russian">Russian</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Bengali">Bengali</option>
+            <option value="Punjabi">Punjabi</option>
+            <option value="Turkish">Turkish</option>
+            <option value="Vietnamese">Vietnamese</option>
+            <option value="Polish">Polish</option>
+            <option value="Dutch">Dutch</option>
+            <option value="Swedish">Swedish</option>
+            <option value="Danish">Danish</option>
+            <option value="Finnish">Finnish</option>
+            <option value="Norwegian">Norwegian</option>
+            <option value="Thai">Thai</option>
+            <option value="Greek">Greek</option>
+            <option value="Hungarian">Hungarian</option>
+            <option value="Hebrew">Hebrew</option>
+            <option value="Indonesian">Indonesian</option>
+            <option value="Malay">Malay</option>
+            <option value="Tagalog">Tagalog</option>
+            <option value="Ukrainian">Ukrainian</option>
+            <option value="Czech">Czech</option>
+            
+        </select>
+
+        <input id="customLang" type="text" placeholder="Or type the language you want here" />
+
+        <button onclick="translateSelection()">Translate</button>
+
+        <div id="outputText"></div>
+    </div>
+</body>
+</html>
