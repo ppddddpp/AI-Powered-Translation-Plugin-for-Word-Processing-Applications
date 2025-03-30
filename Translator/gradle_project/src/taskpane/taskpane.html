@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>AI Translator</title>
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
     <script src="taskpane.js"></script>
     <link rel="stylesheet" href="taskpane.css">
 </head>
+
 <body>
     <div class="container">
         <h1>AI Translator</h1>
-
+        <!-- Text area for input -->
         <textarea id="inputText" placeholder="Enter text here"></textarea>
 
         <label for="targetLang">Target Language:</label>
@@ -46,14 +48,34 @@
             <option value="Tagalog">Tagalog</option>
             <option value="Ukrainian">Ukrainian</option>
             <option value="Czech">Czech</option>
-            
+
         </select>
 
         <input id="customLang" type="text" placeholder="Or type the language you want here" />
+
+        <!-- Main temperature control -->
+        <label for="temperature">Creativity (Temperature):</label>
+        <input type="range" id="temperature" name="temperature" min="0" max="1" step="0.1" value="0.7">
+        <span id="temp-display">0.7</span>
+
+        <!-- Button to toggle advanced settings -->
+        <button id="toggleAdvanced">Show Advanced Settings</button>
+
+        <!-- Advanced settings (hidden by default) -->
+        <div id="advancedSettings" class="advanced-settings">
+            <label for="topP">Output Diversity (Top P):</label>
+            <input type="range" id="topP" name="topP" min="0" max="1" step="0.05" value="0.95">
+            <span id="topP-display">0.95</span>
+
+            <label for="topK">Response Focus (Top K):</label>
+            <input type="number" id="topK" name="topK" min="1" max="100" value="32">
+            <span id="topK-display">32</span>
+        </div>
 
         <button onclick="translateSelection()">Translate</button>
 
         <div id="outputText"></div>
     </div>
 </body>
+
 </html>

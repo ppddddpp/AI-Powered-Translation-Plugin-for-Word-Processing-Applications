@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import os
+import time
 import threading
 import urllib.request
 import zipfile
@@ -104,6 +105,31 @@ def update_env_from_fnm():
         print("Error running 'fnm env':", e)
         sys.exit(1)
 
+def install_node_with_fnm(fnm_path, version="23", retries=3, delay=5):
+    for attempt in range(1, retries + 1):
+        print(f"Attempt {attempt}: Installing Node.js version {version} using fnm...")
+        result = subprocess.run(
+            [fnm_path, "install", version],
+            shell=True,
+            capture_output=True,
+            text=True,
+            env=os.environ
+        )
+        if result.returncode == 0:
+            print("Node.js installed successfully via fnm.")
+            return True
+        else:
+            print("Error installing Node.js with fnm:")
+            print("stdout:", result.stdout)
+            print("stderr:", result.stderr)
+            if attempt < retries:
+                print(f"Retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                print("Maximum retries reached. Exiting.")
+                return False
+
+
 def install_fnm_and_node():
     """
     Installs fnm (Fast Node Manager) and Node.js version 23 locally.
@@ -156,22 +182,9 @@ def install_fnm_and_node():
     fnm_path = fnm_executable
     print(f"Using fnm at: {fnm_path}")
     
-    # Install Node.js version 23 using fnm.
-    print("Installing Node.js version 23 using fnm...")
-    result = subprocess.run(
-        [fnm_path, "install", "23"],
-        shell=True,
-        capture_output=True,
-        text=True,
-        env=os.environ
-    )
-    if result.returncode != 0:
-        print("Error installing Node.js with fnm:")
-        print(result.stdout)
-        print(result.stderr)
+    # Try to install Node.js using fnm with retry logic.
+    if not install_node_with_fnm(fnm_path, version="23", retries=3, delay=5):
         sys.exit(1)
-    else:
-        print("Node.js installed successfully via fnm.")
 
     # Update environment using 'fnm env'
     update_env_from_fnm()

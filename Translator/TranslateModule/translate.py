@@ -72,20 +72,26 @@ def translate():
     source_text = data.get("text", "")
     source_lang = data.get("source_lang", "auto")  # Default to auto-detection
     target_lang = data.get("target_lang")  # Get the target language from user input
+    top_p = float(data.get("topP", 0.95)) # Get the topP from user input
+    top_k = int(data.get("topK", 32)) # Get the topK from user input
+    temperature = float(data.get("temperature", 0.7)) # Get the temperature from user input
 
-    print("Got request:", data)
     if not source_text:
         return jsonify({"error": "No text provided"}), 400
     
     if not target_lang:
         return jsonify({"error": "Target language is required"}), 400
 
-    command = "Translate the following text into " + target_lang + ". \n Return only the translated text. \n"
+    command = (
+        "Translate the following text into " + target_lang + ".\n"
+        "Return only the translated text.\n"
+        "Note: Use a creativity level of " + str(temperature) + "/1, " +
+        "an output diversity of " + str(top_p) + "/1, " +
+        "and a response focus of " + str(top_k) + ".\n"
+    )
     prompt = command + source_text
 
     translated_text = None
-    print("Start translation...")
-    print(f"Gemini API credentials: {GEMINI_API_CREDENTIALS}")
     for credentials in GEMINI_API_CREDENTIALS:
         api_key = credentials["api_key"]
         try:
