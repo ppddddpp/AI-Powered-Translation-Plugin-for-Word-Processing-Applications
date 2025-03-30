@@ -26,7 +26,7 @@
 
 When successfully executed, the plugin integrates into your Word workplace, supporting translation tasks with added features such as:
   - Advanced Translation Customization:
-  -     Customize translation parameters (e.g., creativity level, output diversity, response focus) through user-adjustable settings.
+       Customize translation parameters (e.g., creativity level, output diversity, response focus) through user-adjustable settings.
   - Seamless Integration:
-  -     The plugin works within your word processing environment to provide real-time translations.
+       The plugin works within your word processing environment to provide real-time translations.
 
