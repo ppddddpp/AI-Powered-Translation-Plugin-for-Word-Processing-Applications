@@ -106,6 +106,21 @@ def update_env_from_fnm():
         sys.exit(1)
 
 def install_node_with_fnm(fnm_path, version="23", retries=3, delay=5):
+    """
+    Installs Node.js with the given version using fnm.
+
+    This function runs fnm with the given path and version, and captures the output.
+    If the command succeeds, prints a success message and returns True.
+    If the command fails, prints the output and retries up to 'retries' times
+    with a delay of 'delay' seconds between attempts.
+    If all retries fail, prints an error message and returns False.
+
+    :param fnm_path: Path to the fnm executable.
+    :param version: Node.js version to install. Defaults to "23".
+    :param retries: Number of retries if the command fails. Defaults to 3.
+    :param delay: Delay in seconds between retries. Defaults to 5.
+    :return: True if the installation succeeded, False otherwise.
+    """
     for attempt in range(1, retries + 1):
         print(f"Attempt {attempt}: Installing Node.js version {version} using fnm...")
         result = subprocess.run(
