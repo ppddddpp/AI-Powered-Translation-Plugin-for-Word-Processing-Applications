@@ -8,19 +8,33 @@ import zipfile
 import io
 import shutil
 
+def find_requirements_txt(base_dir):
+    """
+    Searches for the 'requirements.txt' file within the base directory.
+    
+    Returns the full path if found, otherwise returns None.
+    """
+    for root, _, files in os.walk(base_dir):
+        if "requirements.txt" in files:
+            return os.path.join(root, "requirements.txt")
+    return None
+
 def install_python_dependencies():
     """
-    Installs Python dependencies from the requirements.txt file in the project root.
+    Installs Python dependencies from the requirements.txt file found in the project directory.
 
-    This function will output a message indicating that it is installing Python dependencies and then
-    call pip install -r requirements.txt to install the dependencies. If the call succeeds, it will
-    output a success message. If the call fails, it will output an error message and exit the program.
-
-    If no requirements.txt file is found in the project root, the function will do nothing.
+    If requirements.txt is found, it installs dependencies using pip. Otherwise, it prints a warning and skips installation.
     """
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    requirements_path = find_requirements_txt(base_dir)
+
+    if not requirements_path:
+        print("Warning: No 'requirements.txt' found. Skipping Python dependency installation.")
+        return
+
     try:
-        print("Installing Python dependencies from requirements.txt...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
+        print(f"Installing Python dependencies from {requirements_path}...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_path])
         print("Python dependencies installed successfully.")
     except subprocess.CalledProcessError:
         print("An error occurred while installing Python dependencies.")
