@@ -22,18 +22,26 @@
 4. Handling OS Error 5 (Access Denied)
    If you encounter an error (e.g., OS Error 5 - "Access Denied") on the first run, simply close the application and run it again. This error is transient and should not occur on subsequent runs.
 
-## Notice: You have to notice those condition below to make sure application runs:
+## Notification: You have to notice those condition below to make sure application runs:
 
-**1.** When run file if you facing error you should open full folder in you IDE for making sure file reading is success
+**1.** This project works best with:
+
+   Python 3.11.x (Recommended)
+
+   For Python 3.12.x: Although having minor handling, if issues persist, consider using Python 3.11 for smoother setup.
+
+
+**2.** When run file if you facing error you should open full folder in you IDE for making sure file reading is success
    Folder structure in your IDE should be like this:
-         AI-POWERED-TRANSLATION-PLUGIN-FOR-WORD-PROCESSING-APPLICATION
-         |---Translator
-             |--- (other files)
-         |---README.md
-         |---requirements.txt
-         |---WordTranslator.py
+         AI-POWERED-TRANSLATION-PLUGIN-FOR-WORD-PROCESSING-APPLICATION/
+         │
+         ├── Translator/
+         │   └── (other files)
+         ├── README.md
+         ├── requirements.txt
+         └── WordTranslator.py
 
-**2.** You have to trust (in case the window pop up to asking for trusting the source) or else it won't run.
+Also, if prompted by your IDE or system security, **trust the source** or allow access, or the plugin might not run.
 
 ## Output
 

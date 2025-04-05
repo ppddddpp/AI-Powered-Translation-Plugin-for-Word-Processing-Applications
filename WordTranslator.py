@@ -8,6 +8,29 @@ import zipfile
 import io
 import shutil
 
+def check_python_version():
+    major, minor = sys.version_info[:2]
+    if major == 3 and minor == 12:
+        print("\n You are using Python 3.12. Some dependencies like 'tiktoken' may require 'setuptools' and Rust toolchain.")
+        print("   If facing errors, you should installing setuptools manually or switching to Python 3.11 for best compatibility.\n")
+
+def ensure_setuptools():
+    """
+    Ensures that setuptools is installed in the environment.
+
+    This function attempts to import the setuptools module. If the import
+    fails, it installs setuptools using pip. If setuptools is already
+    installed, it prints a confirmation message.
+    """
+
+    try:
+        import setuptools
+    except ImportError:
+        print("setuptools not found. Installing it now...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "setuptools"])
+    else:
+        print("setuptools is already installed.")
+        
 def find_requirements_txt(base_dir):
     """
     Searches for the 'requirements.txt' file within the base directory.
@@ -326,7 +349,9 @@ def run_translator():
     print("Both translate.py and npm start processes have finished.")
 
 if __name__ == "__main__":
+    check_python_version()
+    ensure_setuptools()
     install_python_dependencies()
-    install_fnm_and_node()
-    install_npm_dependencies()
-    run_translator()
+    #install_fnm_and_node()
+    #install_npm_dependencies()
+    #run_translator()
