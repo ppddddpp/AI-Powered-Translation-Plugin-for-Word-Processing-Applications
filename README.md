@@ -1,7 +1,5 @@
 # WordTranslation Plugin
 
-**WordTranslation** is a Python-based translation plugin designed to enhance your Word processing experience. It provides seamless text translation and additional advanced features for customizing translation behavior.
-
 ## Requirements
 
 - **Python 3.x** – Ensure Python is installed on your system.
@@ -26,7 +24,7 @@
 
 **1.** This project works best with:
 
-   Python 3.11.x (Recommended)
+   Python 3.11.x (Recommended, tested with 3.11.8) 
 
    For Python 3.12.x: Although having minor handling, if issues persist, consider using Python 3.11 for smoother setup.
 
@@ -50,4 +48,3 @@ When successfully executed, the plugin integrates into your Word workplace, supp
        Customize translation parameters (e.g., creativity level, output diversity, response focus) through user-adjustable settings.
   - Seamless Integration:
        The plugin works within your word processing environment to provide real-time translations.
-
