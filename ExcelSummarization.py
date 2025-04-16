@@ -78,7 +78,7 @@ def install_npm_dependencies():
     If no package.json is found in the gradle_project folder, the function will print a message and do nothing.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    gradle_project_dir = os.path.join(base_dir, "Translator", "gradle_project")
+    gradle_project_dir = os.path.join(base_dir, "Summarizer", "gradle_project")
     package_json_path = os.path.join(gradle_project_dir, "package.json")
     
     if os.path.exists(package_json_path):
@@ -111,7 +111,7 @@ def update_env_from_fnm():
     exits the program with status code 1.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    local_npm_dir = os.path.join(base_dir, "Translator", "npm")
+    local_npm_dir = os.path.join(base_dir, "Summarizer", "npm")
     fnm_executable = os.path.join(local_npm_dir, "fnm.exe")
     
     try:
@@ -197,7 +197,7 @@ def install_fnm_and_node():
     """
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    local_npm_dir = os.path.join(base_dir, "Translator", "npm")
+    local_npm_dir = os.path.join(base_dir, "Summarizer", "npm")
     os.makedirs(local_npm_dir, exist_ok=True)
 
     # Download and extract fnm if it doesn't exist.
@@ -268,23 +268,23 @@ def install_fnm_and_node():
         print("Error verifying Node.js/npm versions.")
         sys.exit(1)
 
-def run_translate_script():
+def run_summarizer_script():
     """
-    Starts the translate.py script using the current Python interpreter.
+    Starts the summarizer.py script using the current Python interpreter.
 
-    If the translate.py script is not found, an error message is printed and the program exits with status code 1.
+    If the summarizer.py script is not found, an error message is printed and the program exits with status code 1.
 
-    Returns a subprocess.Popen object representing the running translate.py script.
+    Returns a subprocess.Popen object representing the running summarizer.py script.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    translate_script = os.path.join(base_dir, "Translator", "TranslateModule", "translate.py")
+    summarizer_script = os.path.join(base_dir, "Summarizer", "SummarizerModule", "summarizer.py")
     
-    if not os.path.exists(translate_script):
-        print(f"Error: Could not find {translate_script}")
+    if not os.path.exists(summarizer_script):
+        print(f"Error: Could not find {summarizer_script}")
         sys.exit(1)
 
-    print("Starting translate.py...")
-    return subprocess.Popen([sys.executable, translate_script])
+    print("Starting summarizer.py...")
+    return subprocess.Popen([sys.executable, summarizer_script])
 
 def run_npm_start():
     """
@@ -300,7 +300,7 @@ def run_npm_start():
     Returns a subprocess.Popen object or None
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    gradle_project_dir = os.path.join(base_dir, "Translator", "gradle_project")
+    gradle_project_dir = os.path.join(base_dir, "Summarizer", "gradle_project")
     package_json_path = os.path.join(gradle_project_dir, "package.json")
     
     if not os.path.exists(package_json_path):
@@ -331,22 +331,22 @@ def run_npm_start():
         print(f"An error occurred while starting npm: {e}")
         sys.exit(1)
 
-def run_translator():
+def run_summarizer():
     """
-    Runs the translate.py script in a subprocess and the 'npm start' command in a thread.
+    Runs the summarizer.py script in a subprocess and the 'npm start' command in a thread.
 
-    The translate.py script is started first, and the 'npm start' command is started in a separate thread.
-    The translate.py subprocess is waited on, and the 'npm start' thread is joined.
+    The summarizer.py script is started first, and the 'npm start' command is started in a separate thread.
+    The summarizer.py subprocess is waited on, and the 'npm start' thread is joined.
     A success message is printed after both processes have finished.
 
     Returns None
     """
-    translate_proc = run_translate_script()
+    summarize_proc = run_summarizer_script()
     npm_thread = threading.Thread(target=run_npm_start)
     npm_thread.start()
-    translate_proc.wait()
+    summarize_proc.wait()
     npm_thread.join()
-    print("Both translate.py and npm start processes have finished.")
+    print("Both summarizer.py and npm start processes have finished.")
 
 if __name__ == "__main__":
     check_python_version()
@@ -354,4 +354,4 @@ if __name__ == "__main__":
     install_python_dependencies()
     install_fnm_and_node()
     install_npm_dependencies()
-    run_translator()
+    run_summarizer()
