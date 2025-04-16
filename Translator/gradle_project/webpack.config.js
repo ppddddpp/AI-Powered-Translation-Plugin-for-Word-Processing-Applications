@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 
-const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
 const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -21,7 +20,6 @@ module.exports = async (env, options) => {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
       taskpane: ["./src/taskpane/taskpane.js", "./src/taskpane/taskpane.html"],
       commands: "./src/commands/commands.js",
-      functions: "./src/functions/functions.js",
     },
     output: {
       clean: true,
@@ -53,14 +51,10 @@ module.exports = async (env, options) => {
       ],
     },
     plugins: [
-      new CustomFunctionsMetadataPlugin({
-        output: "functions.json",
-        input: "./src/functions/functions.js", 
-      }),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
-        chunks: ["polyfill", "taskpane", "functions"],
+        chunks: ["polyfill", "taskpane"],
       }),
       new CopyWebpackPlugin({
         patterns: [
