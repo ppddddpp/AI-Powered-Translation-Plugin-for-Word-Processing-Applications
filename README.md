@@ -45,3 +45,7 @@ When successfully executed, the plugin integrates into your Word workplace, supp
        Customize translation parameters (e.g., creativity level, output diversity, response focus) through user-adjustable settings.
   - Seamless Integration:
        The plugin works within your word processing environment to provide real-time translations.
+
+## Video demo:
+
+https://drive.google.com/drive/folders/1LPyYq_kr6x9dax7F7CVl2EG-fdBU6byo?usp=sharing
